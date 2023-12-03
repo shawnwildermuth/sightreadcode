@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+  import { useRouter } from "~/router";
 </script>
 
 <template>
