@@ -1,17 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+using SightReadCode.Api.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<SightReadingContext>();
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
-app.MapGet("/api/getcode", () =>
+app.MapGet("/api/getcode", async (SightReadingContext ctx) =>
 {
-  return """
-    function foo() {
-      console.write("foo");
-    }
-  """;
+  var results = await ctx.CodeBlocks.ToListAsync();
+  return Results.Ok(results);
 });
+
+app.MapFallbackToFile("/index.html");
 
 app.Run();
 

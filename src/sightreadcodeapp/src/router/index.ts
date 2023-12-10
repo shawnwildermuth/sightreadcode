@@ -1,7 +1,8 @@
-import { useRouter, RouteConfig } from 'vue-router';
-import { HomeView, CodeView } from '@/views';
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from "@/views/HomeView.vue";
+import CodeView from "@/views/CodeView.vue";
 
-const routes: Array<RouteConfig> = [
+const routes = [
   // Define your routes here
   {
     path: '/',
@@ -16,6 +17,9 @@ const routes: Array<RouteConfig> = [
   },
 ];
 
-const router = useRouter(routes);
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+});
 
 export default router;
