@@ -1,0 +1,44 @@
+@host = http://localhost:5211
+
+GET {{host}}/api/codeblocks
+Accept: application/json
+
+###
+
+GET {{host}}/api/codeblocks/random
+Accept: application/json
+
+###
+
+GET {{host}}/api/codeblocks/2
+Accept: application/json
+
+###
+
+POST {{host}}/api/codeblocks
+Content-Type: application/json
+
+{
+  "theCode": "console.log('foo');",
+  "title": "Another Block",
+  "languageCode": "js"
+}
+
+###
+
+PUT {{host}}/api/codeblocks/1
+Content-Type: application/json
+
+{
+  {
+    "id": 1,
+    "theCode": "console.warn('foo');",
+    "title": "Another Block",
+    "languageCode": "js"
+  }
+}
+
+###
+
+DELETE {{host}}/api/codeblocks/1
+

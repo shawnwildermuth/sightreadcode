@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SightReadCode.Api.Data;
+using WilderMinds.MinimalApiDiscovery;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,11 +11,7 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.MapGet("/api/getcode", async (SightReadingContext ctx) =>
-{
-  var results = await ctx.CodeBlocks.ToListAsync();
-  return Results.Ok(results);
-});
+app.MapApis();
 
 app.MapFallbackToFile("/index.html");
 

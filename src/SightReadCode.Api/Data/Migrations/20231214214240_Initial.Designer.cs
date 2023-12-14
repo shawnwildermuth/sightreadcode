@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SightReadCode.Api.Data;
 
@@ -10,9 +11,11 @@ using SightReadCode.Api.Data;
 namespace SightReadCode.Api.Migrations
 {
     [DbContext(typeof(SightReadingContext))]
-    partial class SightReadingContextModelSnapshot : ModelSnapshot
+    [Migration("20231214214240_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
