@@ -6,11 +6,9 @@
   <main class="container 
                mx-auto 
                min-h-screen 
-               w-full 
-               bg-gray-400">
-    <header class="bg-blue-950 
-                    text-white 
-                    p-2 
+               w-full"
+               data-theme="business">
+    <header class="p-2 
                     flex 
                     justify-between">
       <h1 class="font-bold text-2xl">Sight Read Code</h1>
@@ -19,7 +17,7 @@
         <li class="mx-2"><RouterLink to="/code" class="menu-button">Read Code</RouterLink></li>
       </ul>
     </header>
-    <section class="border p-1 border-gray-200">
+    <section class="border p-1">
       <RouterView />
     </section>
   </main>

@@ -6,6 +6,9 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require("@shawnwildermuth/sanewind")],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["business"],
+  },
 }
 

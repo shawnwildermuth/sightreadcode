@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Mapster;
+using Microsoft.EntityFrameworkCore;
 using SightReadCode.Api.Data;
 using SightReadCode.Api.Data.Entities;
 using WilderMinds.MinimalApiDiscovery;
@@ -15,6 +16,41 @@ public class CodeBlocksApi : IApi
     grp.MapGet("{id:int}", GetOne);
     grp.MapGet("random", GetRandom);
     grp.MapPost("", Create);
+    grp.MapPut("{id:int}", Update);
+    grp.MapDelete("{id:int}", Delete);
+  }
+
+  public static async Task<IResult> Delete(SightReadingContext ctx, int id)
+  {
+    if (await ctx.CodeBlocks
+                 .Where(c => c.Id == id)
+                 .ExecuteDeleteAsync() > 0)
+    {
+      return Results.Ok();
+    }
+
+    return Results.Problem("Could not delete code block.");
+  }
+
+  public static async Task<IResult> Update(SightReadingContext ctx, int id, CodeBlock model)
+  {
+    var old = await ctx.CodeBlocks.FindAsync(id);
+    if (old is null)
+    {
+      return Results.NotFound("No code block found.");
+    }
+
+    model.Adapt(old);
+
+    if (await ctx.SaveChangesAsync() > 0)
+    {
+      return Results.Ok(old);
+    }
+    else
+    {
+      return Results.Problem("No changes detected.");
+    }
+      
   }
 
   public static async Task<IResult> Create(SightReadingContext ctx, CodeBlock model)
@@ -31,9 +67,10 @@ public class CodeBlocksApi : IApi
 
   public static async Task<IResult> GetRandom(SightReadingContext ctx)
   {
+    var random = new Random();
+
     var result = await ctx.CodeBlocks
-      .OrderBy(c => new Guid())
-      .FirstAsync();
+      .ElementAtAsync(random.Next(0, ctx.CodeBlocks.Count()));
 
     return Results.Ok(result);
   }

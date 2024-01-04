@@ -1,4 +1,4 @@
-@host = http://localhost:5211
+@host = http://localhost:8000
 
 GET {{host}}/api/codeblocks
 Accept: application/json
@@ -10,7 +10,7 @@ Accept: application/json
 
 ###
 
-GET {{host}}/api/codeblocks/2
+GET {{host}}/api/codeblocks/3
 Accept: application/json
 
 ###
@@ -26,19 +26,17 @@ Content-Type: application/json
 
 ###
 
-PUT {{host}}/api/codeblocks/1
+PUT {{host}}/api/codeblocks/4
 Content-Type: application/json
 
 {
-  {
-    "id": 1,
-    "theCode": "console.warn('foo');",
-    "title": "Another Block",
-    "languageCode": "js"
-  }
+  "id": 4,
+  "theCode": "console.log('foo');",
+  "title": "A simple block",
+  "languageCode": "js"
 }
 
 ###
 
-DELETE {{host}}/api/codeblocks/1
+DELETE {{host}}/api/codeblocks/4
 
